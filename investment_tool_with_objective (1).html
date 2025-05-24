@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Investment Allocation Tool</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body style="font-family:Arial, sans-serif; padding: 20px;">
+    <h2>Investment Allocation Tool</h2>
+
+    <label for="objectiveSelect">Select Investment Objective:</label>
+    <select id="objectiveSelect">
+        <option value="Growth">Growth</option>
+        <option value="Balanced" selected>Balanced</option>
+        <option value="Income">Income</option>
+    </select>
+
+    <br><br>
+
+    <label for="coreSelect">Select Core Allocation:</label>
+    <select id="coreSelect">
+        <option value="100% bonds">100%% bonds</option>
+        <option value="90% bonds / 10% stocks">90%% bonds / 10%% stocks</option>
+        <option value="80% bonds / 20% stocks">80%% bonds / 20%% stocks</option>
+        <option value="70% bonds / 30% stocks">70%% bonds / 30%% stocks</option>
+        <option value="60% bonds / 40% stocks" selected>60%% bonds / 40%% stocks</option>
+        <option value="50% bonds / 50% stocks">50%% bonds / 50%% stocks</option>
+        <option value="40% bonds / 60% stocks">40%% bonds / 60%% stocks</option>
+        <option value="30% bonds / 70% stocks">30%% bonds / 70%% stocks</option>
+        <option value="20% bonds / 80% stocks">20%% bonds / 80%% stocks</option>
+        <option value="10% bonds / 90% stocks">10%% bonds / 90%% stocks</option>
+        <option value="100% stocks">100%% stocks</option>
+    </select>
+
+    <br><br>
+
+    <label for="satelliteSelect">Select Satellite Strategy:</label>
+    <select id="satelliteSelect">
+        <option value="No Satellite">No Satellite</option>
+        <option value="Conservative">Conservative</option>
+        <option value="Moderate" selected>Moderate</option>
+        <option value="Aggressive">Aggressive</option>
+    </select>
+
+    <div id="chart" style="margin-top: 30px;"></div>
+
+    <script>
+        const dataTable = [{"Core Allocation":"100% bonds","Satellite Strategy":"No Satellite","Core Stocks %":0.0,"Satellite %":0.0,"Bonds %":100},{"Core Allocation":"100% bonds","Satellite Strategy":"Conservative","Core Stocks %":0.0,"Satellite %":0.0,"Bonds %":100},{"Core Allocation":"100% bonds","Satellite Strategy":"Moderate","Core Stocks %":0.0,"Satellite %":0.0,"Bonds %":100},{"Core Allocation":"100% bonds","Satellite Strategy":"Aggressive","Core Stocks %":0.0,"Satellite %":0.0,"Bonds %":100},{"Core Allocation":"90% bonds \/ 10% stocks","Satellite Strategy":"No Satellite","Core Stocks %":10.0,"Satellite %":0.0,"Bonds %":90},{"Core Allocation":"90% bonds \/ 10% stocks","Satellite Strategy":"Conservative","Core Stocks %":9.0,"Satellite %":1.0,"Bonds %":90},{"Core Allocation":"90% bonds \/ 10% stocks","Satellite Strategy":"Moderate","Core Stocks %":8.0,"Satellite %":2.0,"Bonds %":90},{"Core Allocation":"90% bonds \/ 10% stocks","Satellite Strategy":"Aggressive","Core Stocks %":7.0,"Satellite %":3.0,"Bonds %":90},{"Core Allocation":"80% bonds \/ 20% stocks","Satellite Strategy":"No Satellite","Core Stocks %":20.0,"Satellite %":0.0,"Bonds %":80},{"Core Allocation":"80% bonds \/ 20% stocks","Satellite Strategy":"Conservative","Core Stocks %":18.0,"Satellite %":2.0,"Bonds %":80},{"Core Allocation":"80% bonds \/ 20% stocks","Satellite Strategy":"Moderate","Core Stocks %":16.0,"Satellite %":4.0,"Bonds %":80},{"Core Allocation":"80% bonds \/ 20% stocks","Satellite Strategy":"Aggressive","Core Stocks %":14.0,"Satellite %":6.0,"Bonds %":80},{"Core Allocation":"70% bonds \/ 30% stocks","Satellite Strategy":"No Satellite","Core Stocks %":30.0,"Satellite %":0.0,"Bonds %":70},{"Core Allocation":"70% bonds \/ 30% stocks","Satellite Strategy":"Conservative","Core Stocks %":27.0,"Satellite %":3.0,"Bonds %":70},{"Core Allocation":"70% bonds \/ 30% stocks","Satellite Strategy":"Moderate","Core Stocks %":24.0,"Satellite %":6.0,"Bonds %":70},{"Core Allocation":"70% bonds \/ 30% stocks","Satellite Strategy":"Aggressive","Core Stocks %":21.0,"Satellite %":9.0,"Bonds %":70},{"Core Allocation":"60% bonds \/ 40% stocks","Satellite Strategy":"No Satellite","Core Stocks %":40.0,"Satellite %":0.0,"Bonds %":60},{"Core Allocation":"60% bonds \/ 40% stocks","Satellite Strategy":"Conservative","Core Stocks %":36.0,"Satellite %":4.0,"Bonds %":60},{"Core Allocation":"60% bonds \/ 40% stocks","Satellite Strategy":"Moderate","Core Stocks %":32.0,"Satellite %":8.0,"Bonds %":60},{"Core Allocation":"60% bonds \/ 40% stocks","Satellite Strategy":"Aggressive","Core Stocks %":28.0,"Satellite %":12.0,"Bonds %":60},{"Core Allocation":"50% bonds \/ 50% stocks","Satellite Strategy":"No Satellite","Core Stocks %":50.0,"Satellite %":0.0,"Bonds %":50},{"Core Allocation":"50% bonds \/ 50% stocks","Satellite Strategy":"Conservative","Core Stocks %":45.0,"Satellite %":5.0,"Bonds %":50},{"Core Allocation":"50% bonds \/ 50% stocks","Satellite Strategy":"Moderate","Core Stocks %":40.0,"Satellite %":10.0,"Bonds %":50},{"Core Allocation":"50% bonds \/ 50% stocks","Satellite Strategy":"Aggressive","Core Stocks %":35.0,"Satellite %":15.0,"Bonds %":50},{"Core Allocation":"40% bonds \/ 60% stocks","Satellite Strategy":"No Satellite","Core Stocks %":60.0,"Satellite %":0.0,"Bonds %":40},{"Core Allocation":"40% bonds \/ 60% stocks","Satellite Strategy":"Conservative","Core Stocks %":54.0,"Satellite %":6.0,"Bonds %":40},{"Core Allocation":"40% bonds \/ 60% stocks","Satellite Strategy":"Moderate","Core Stocks %":48.0,"Satellite %":12.0,"Bonds %":40},{"Core Allocation":"40% bonds \/ 60% stocks","Satellite Strategy":"Aggressive","Core Stocks %":42.0,"Satellite %":18.0,"Bonds %":40},{"Core Allocation":"30% bonds \/ 70% stocks","Satellite Strategy":"No Satellite","Core Stocks %":70.0,"Satellite %":0.0,"Bonds %":30},{"Core Allocation":"30% bonds \/ 70% stocks","Satellite Strategy":"Conservative","Core Stocks %":63.0,"Satellite %":7.0,"Bonds %":30},{"Core Allocation":"30% bonds \/ 70% stocks","Satellite Strategy":"Moderate","Core Stocks %":56.0,"Satellite %":14.0,"Bonds %":30},{"Core Allocation":"30% bonds \/ 70% stocks","Satellite Strategy":"Aggressive","Core Stocks %":49.0,"Satellite %":21.0,"Bonds %":30},{"Core Allocation":"20% bonds \/ 80% stocks","Satellite Strategy":"No Satellite","Core Stocks %":80.0,"Satellite %":0.0,"Bonds %":20},{"Core Allocation":"20% bonds \/ 80% stocks","Satellite Strategy":"Conservative","Core Stocks %":72.0,"Satellite %":8.0,"Bonds %":20},{"Core Allocation":"20% bonds \/ 80% stocks","Satellite Strategy":"Moderate","Core Stocks %":64.0,"Satellite %":16.0,"Bonds %":20},{"Core Allocation":"20% bonds \/ 80% stocks","Satellite Strategy":"Aggressive","Core Stocks %":56.0,"Satellite %":24.0,"Bonds %":20},{"Core Allocation":"10% bonds \/ 90% stocks","Satellite Strategy":"No Satellite","Core Stocks %":90.0,"Satellite %":0.0,"Bonds %":10},{"Core Allocation":"10% bonds \/ 90% stocks","Satellite Strategy":"Conservative","Core Stocks %":81.0,"Satellite %":9.0,"Bonds %":10},{"Core Allocation":"10% bonds \/ 90% stocks","Satellite Strategy":"Moderate","Core Stocks %":72.0,"Satellite %":18.0,"Bonds %":10},{"Core Allocation":"10% bonds \/ 90% stocks","Satellite Strategy":"Aggressive","Core Stocks %":63.0,"Satellite %":27.0,"Bonds %":10},{"Core Allocation":"100% stocks","Satellite Strategy":"No Satellite","Core Stocks %":100.0,"Satellite %":0.0,"Bonds %":0},{"Core Allocation":"100% stocks","Satellite Strategy":"Conservative","Core Stocks %":90.0,"Satellite %":10.0,"Bonds %":0},{"Core Allocation":"100% stocks","Satellite Strategy":"Moderate","Core Stocks %":80.0,"Satellite %":20.0,"Bonds %":0},{"Core Allocation":"100% stocks","Satellite Strategy":"Aggressive","Core Stocks %":70.0,"Satellite %":30.0,"Bonds %":0}];
+
+        function updateChart() {
+            const objectiveVal = document.getElementById("objectiveSelect").value;
+            const coreVal = document.getElementById("coreSelect").value;
+            const satVal = document.getElementById("satelliteSelect").value;
+
+            const row = dataTable.find(d => d["Core Allocation"] === coreVal && d["Satellite Strategy"] === satVal);
+
+            const data = [{
+                values: [row["Core Stocks %"], row["Satellite %"], row["Bonds %"]],
+                labels: ["Core Stocks", "Satellite", "Bonds"],
+                type: 'pie',
+                hole: .3
+            }];
+
+            const layout = {
+                title: `Portfolio Allocation: ${objectiveVal} Objective – ${coreVal} + ${satVal} Satellite`,
+                height: 400,
+                width: 500
+            };
+
+            Plotly.newPlot('chart', data, layout);
+        }
+
+        updateChart();
+        document.getElementById("objectiveSelect").addEventListener("change", updateChart);
+        document.getElementById("coreSelect").addEventListener("change", updateChart);
+        document.getElementById("satelliteSelect").addEventListener("change", updateChart);
+    </script>
+</body>
+</html>
